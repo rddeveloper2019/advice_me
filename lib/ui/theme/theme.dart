@@ -1,0 +1,12 @@
+import 'package:flutter/material.dart';
+
+const primaryColor = Color(0xFFF74AB2);
+final themeData = ThemeData(
+  primaryColor: primaryColor,
+  scaffoldBackgroundColor: Color(0xfff1f3ef),
+  colorScheme: .fromSeed(seedColor: primaryColor),
+  textTheme: TextTheme(
+    titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+  ),
+  dividerTheme: DividerThemeData(color: Colors.grey.withAlpha(50)),
+);
