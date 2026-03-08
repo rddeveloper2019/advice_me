@@ -20,16 +20,15 @@ class RandomAdviceCubit extends Cubit<RandomAdviceState> {
   Future<void> getRandomAdvice() async {
     try {
       final result = await _api.getRandomAdvice();
-      print('(**) => result:  ${result}');
 
-      final trasnlation = await _translator.translate(
+      final translation = await _translator.translate(
         result.advice.advice,
         to: 'ru',
       );
 
       emit(
         state.copyWith(
-          advice: Advice(id: result.advice.id, advice: trasnlation.text),
+          advice: Advice(id: result.advice.id, advice: translation.text),
         ),
       );
     } catch (e) {

@@ -38,9 +38,9 @@ class HistoryScreen extends StatelessWidget {
                   crossAxisSpacing: 10.0,
                   childAspectRatio: 0.7,
                 ),
-                itemCount: state.historyAdviceList.length,
+                itemCount: state.adviceList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final advice = state.historyAdviceList[index];
+                  final advice = state.adviceList[index];
 
                   return RhymeHistoryCard(advice: advice);
                 },

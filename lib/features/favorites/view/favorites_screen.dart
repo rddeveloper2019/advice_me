@@ -25,7 +25,7 @@ class FavoritesScreen extends StatelessWidget {
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
         BlocBuilder<AdviceListCubit, AdviceListState>(
           builder: (context, state) {
-            final favorites = state.historyAdviceList
+            final favorites = state.adviceList
                 .where((a) => a.isFavorite == true)
                 .toList();
             return SliverList.separated(

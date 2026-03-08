@@ -15,8 +15,11 @@ class AdviceListCubit extends Cubit<AdviceListState> {
   void addAdvice(Advice advice) {
     emit(
       state.copyWith(
-        adviceList: [...state.adviceList, advice],
-        historyAdviceList: [...state.historyAdviceList, advice],
+        adviceList: [
+          advice,
+          ...state.adviceList.where((a) => a.id != advice.id),
+        ],
+
         isLoading: false,
       ),
     );
@@ -25,39 +28,24 @@ class AdviceListCubit extends Cubit<AdviceListState> {
 
   Future<void> getHistoryAdvice() async {
     emit(state.copyWith(isLoading: true));
-    final historyAdviceList = await _historyRepository.getAdviceList();
-    emit(
-      state.copyWith(historyAdviceList: historyAdviceList, isLoading: false),
-    );
+    final adviceList = await _historyRepository.getAdviceList();
+    emit(state.copyWith(adviceList: adviceList, isLoading: false));
   }
 
   Future<void> updateAdvice(Advice advice) async {
     emit(state.copyWith(isLoading: true));
-    final historyAdviceList = await _historyRepository.getAdviceList();
-    final historyIndex = historyAdviceList.indexWhere(
-      (item) => item.id == advice.id,
-    );
+    final adviceList = await _historyRepository.getAdviceList();
+    final historyIndex = adviceList.indexWhere((item) => item.id == advice.id);
     if (historyIndex != -1) {
-      historyAdviceList[historyIndex] = advice;
-      await _historyRepository.updateAdviceList(historyAdviceList);
+      adviceList[historyIndex] = advice;
+      await _historyRepository.updateAdviceList(adviceList);
     }
 
-    final adviceList = state.adviceList;
-    final index = adviceList.indexWhere((item) => item.id == advice.id);
-    if (index != -1) {
-      adviceList[index] = advice;
-    }
-    emit(
-      state.copyWith(
-        historyAdviceList: historyAdviceList,
-        adviceList: adviceList,
-        isLoading: false,
-      ),
-    );
+    emit(state.copyWith(adviceList: adviceList, isLoading: false));
   }
 
   Future<void> clearHistoryAdvice() async {
     await _historyRepository.clearAll();
-    emit(state.copyWith(historyAdviceList: []));
+    emit(state.copyWith(adviceList: []));
   }
 }
