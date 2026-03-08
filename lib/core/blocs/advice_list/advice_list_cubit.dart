@@ -31,6 +31,31 @@ class AdviceListCubit extends Cubit<AdviceListState> {
     );
   }
 
+  Future<void> updateAdvice(Advice advice) async {
+    emit(state.copyWith(isLoading: true));
+    final historyAdviceList = await _historyRepository.getAdviceList();
+    final historyIndex = historyAdviceList.indexWhere(
+      (item) => item.id == advice.id,
+    );
+    if (historyIndex != -1) {
+      historyAdviceList[historyIndex] = advice;
+      await _historyRepository.updateAdviceList(historyAdviceList);
+    }
+
+    final adviceList = state.adviceList;
+    final index = adviceList.indexWhere((item) => item.id == advice.id);
+    if (index != -1) {
+      adviceList[index] = advice;
+    }
+    emit(
+      state.copyWith(
+        historyAdviceList: historyAdviceList,
+        adviceList: adviceList,
+        isLoading: false,
+      ),
+    );
+  }
+
   Future<void> clearHistoryAdvice() async {
     await _historyRepository.clearAll();
     emit(state.copyWith(historyAdviceList: []));

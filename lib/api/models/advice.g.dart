@@ -10,10 +10,12 @@ Advice _$AdviceFromJson(Map<String, dynamic> json) => Advice(
   id: (json['id'] as num).toInt(),
   advice: json['advice'] as String,
   date: json['date'] as String?,
+  isFavorite: json['isFavorite'] as bool?,
 );
 
 Map<String, dynamic> _$AdviceToJson(Advice instance) => <String, dynamic>{
   'id': instance.id,
   'advice': instance.advice,
   'date': instance.date,
+  'isFavorite': instance.isFavorite,
 };

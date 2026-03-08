@@ -98,7 +98,18 @@ class _SearchScreenState extends State<SearchScreenView> {
               },
               itemBuilder: (BuildContext ctx, int idx) {
                 final advice = state.adviceList[idx];
-                return RhymeListCard(advice: advice);
+                return RhymeListCard(
+                  advice: advice,
+                  onTap: (Advice advice) {
+                    context.read<AdviceListCubit>().updateAdvice(
+                      Advice(
+                        id: advice.id,
+                        advice: advice.advice,
+                        isFavorite: advice.isFavorite == true ? false : true,
+                      ),
+                    );
+                  },
+                );
               },
             );
           },

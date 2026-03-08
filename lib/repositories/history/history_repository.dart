@@ -37,6 +37,11 @@ class HistoryRepository implements HistoryAdviceRepositoryInterface {
     }
   }
 
+  @override
+  Future<void> updateAdviceList(List<Advice> newList) async {
+    await saveAdviceList(newList);
+  }
+
   Future<void> saveAdviceList(List<Advice> advices) async {
     final jsonList = advices.map((a) => a.toJson()).toList();
     await prefs.setString(_key, jsonEncode(jsonList));

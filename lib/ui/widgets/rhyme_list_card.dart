@@ -6,18 +6,19 @@ import './base_container.dart';
 class RhymeListCard extends StatelessWidget {
   const RhymeListCard({
     super.key,
-    this.isFavorite = false,
     required this.advice,
     this.source,
+    required this.onTap,
   });
 
-  final bool isFavorite;
   final Advice advice;
   final String? source;
+  final void Function(Advice advice) onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isFavorite = advice.isFavorite == true;
 
     return BaseContainer(
       padding: EdgeInsetsGeometry.all(16),
@@ -54,7 +55,9 @@ class RhymeListCard extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              onTap(advice);
+            },
             icon: Icon(
               Icons.favorite,
               color: isFavorite

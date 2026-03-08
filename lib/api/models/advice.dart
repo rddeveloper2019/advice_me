@@ -5,13 +5,19 @@ part 'advice.g.dart';
 // @RealmModel()
 @JsonSerializable()
 class Advice {
-  const Advice({required this.id, required this.advice, this.date});
+  const Advice({
+    required this.id,
+    required this.advice,
+    this.date,
+    this.isFavorite,
+  });
 
   factory Advice.fromJson(Map<String, dynamic> json) => _$AdviceFromJson(json);
 
   final int id;
   final String advice;
   final String? date;
+  final bool? isFavorite;
 
   Map<String, dynamic> toJson() => _$AdviceToJson(this);
 
