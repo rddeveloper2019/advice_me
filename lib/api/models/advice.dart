@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'advice.g.dart';
 
+// @RealmModel()
 @JsonSerializable()
 class Advice {
   const Advice({required this.id, required this.advice, this.date});

@@ -2,13 +2,11 @@
 
 part of 'api.dart';
 
-// dart format off
-
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl, this.errorLogger});
@@ -40,7 +38,7 @@ class _RestClient implements RestClient {
     try {
       _value = SingleAdviceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -67,7 +65,7 @@ class _RestClient implements RestClient {
     try {
       _value = SearchAdviceResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
+      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -100,5 +98,3 @@ class _RestClient implements RestClient {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
-
-// dart format on

@@ -1,7 +1,8 @@
+import 'package:advice_me/core/blocs/advice_list/advice_list_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:advice_me/api/models/advice.dart';
 import 'package:advice_me/ui/ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class HistoryScreen extends StatelessWidget {
@@ -21,26 +22,31 @@ class HistoryScreen extends StatelessWidget {
           backgroundColor: theme.cardColor,
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 10)),
-        SliverPadding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
-          sliver: SliverGrid.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 250.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 0.9,
-            ),
-            itemCount: 20,
-            itemBuilder: (BuildContext context, int index) {
-              final advice = Advice(
-                id: 4,
-                advice:
-                    "You spend half your life asleep or in bed. It's worth spending money on a good mattress, decent pillows and a comfy duvet.",
+        BlocBuilder<AdviceListCubit, AdviceListState>(
+          builder: (context, state) {
+            if (state.isLoading) {
+              return SliverFillRemaining(
+                child: Center(child: CircularProgressIndicator()),
               );
+            }
+            return SliverPadding(
+              padding: EdgeInsetsGeometry.symmetric(horizontal: 16),
+              sliver: SliverGrid.builder(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 250.0,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                  childAspectRatio: 0.7,
+                ),
+                itemCount: state.historyAdviceList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final advice = state.historyAdviceList[index];
 
-              return RhymeHistoryCard(advice: advice);
-            },
-          ),
+                  return RhymeHistoryCard(advice: advice);
+                },
+              ),
+            );
+          },
         ),
       ],
     );

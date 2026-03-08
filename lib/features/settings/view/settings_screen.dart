@@ -1,5 +1,7 @@
+import 'package:advice_me/core/blocs/advice_list/advice_list_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../widgets/settings_action_card.dart';
 import '../widgets/settings_toggle_card.dart';
@@ -50,6 +52,10 @@ class SettingsScreen extends StatelessWidget {
             subtitle: 'Очистить историю из кеша приложения',
             iconData: Icons.delete_forever_outlined,
             iconColor: theme.primaryColor,
+            tooltip: 'История очищена',
+            onPressed: () {
+              context.read<AdviceListCubit>().clearHistoryAdvice();
+            },
           ),
         ),
         SliverToBoxAdapter(
