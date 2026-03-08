@@ -1,3 +1,4 @@
+import 'package:advice_me/api/models/advice.dart';
 import 'package:advice_me/core/blocs/advice_list/advice_list_cubit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,34 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    Future<void> _deleteAdvice(Advice advice) async {
+      final result = await showDialog<bool?>(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            iconColor: theme.primaryColor,
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.warning, color: theme.primaryColor, size: 32),
+                TextButton(
+                  onPressed: () {
+                    ctx.maybePop(true);
+                  },
+                  child: Text('Удалить'),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+      if (result == true) {
+        context.read<AdviceListCubit>().deleteAdvice(advice);
+      }
+    }
+
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -42,7 +71,12 @@ class HistoryScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   final advice = state.adviceList[index];
 
-                  return RhymeHistoryCard(advice: advice);
+                  return HistoryAdviceCard(
+                    advice: advice,
+                    onTap: () {
+                      _deleteAdvice(advice);
+                    },
+                  );
                 },
               ),
             );

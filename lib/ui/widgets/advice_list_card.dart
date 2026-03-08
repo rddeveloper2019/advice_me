@@ -3,8 +3,8 @@ import 'package:advice_me/api/models/advice.dart';
 
 import './base_container.dart';
 
-class RhymeListCard extends StatelessWidget {
-  const RhymeListCard({
+class AdviceListCard extends StatelessWidget {
+  const AdviceListCard({
     super.key,
     required this.advice,
     this.source,

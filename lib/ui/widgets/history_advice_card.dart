@@ -2,8 +2,8 @@ import 'package:advice_me/api/models/advice.dart';
 import 'package:advice_me/ui/widgets/base_container.dart';
 import 'package:flutter/material.dart';
 
-class RhymeHistoryCard extends StatelessWidget {
-  const RhymeHistoryCard({
+class HistoryAdviceCard extends StatelessWidget {
+  const HistoryAdviceCard({
     super.key,
     required this.advice,
     this.title = 'Совет',

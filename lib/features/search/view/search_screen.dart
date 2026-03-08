@@ -1,3 +1,4 @@
+import 'package:advice_me/features/search/widgets/search_advice_bottom_sheet.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +9,6 @@ import 'package:advice_me/ui/ui.dart';
 import 'package:translator/translator.dart';
 
 import '../widgets/search_button.dart';
-import '../widgets/search_rhymes_bottom_sheet.dart';
 
 @RoutePage()
 class SearchScreen extends StatelessWidget {
@@ -68,7 +68,7 @@ class _SearchScreenState extends State<SearchScreenView> {
               if (state.advice == null) {
                 return Padding(
                   padding: EdgeInsets.all(26.0),
-                  child: RhymeHistoryCard(
+                  child: HistoryAdviceCard(
                     isLarge: true,
                     title: 'Совет дня',
                     advice: Advice(id: 0, advice: 'Нет данных'),
@@ -78,12 +78,13 @@ class _SearchScreenState extends State<SearchScreenView> {
 
               return Padding(
                 padding: EdgeInsets.all(16.0),
-                child: RhymeHistoryCard(
+                child: HistoryAdviceCard(
                   isLarge: true,
                   title: 'Совет дня',
                   advice: state.advice!,
                   onTap: () {
                     context.read<AdviceListCubit>().addAdvice(state.advice!);
+                    context.read<RandomAdviceCubit>().getRandomAdvice();
                   },
                 ),
               );
@@ -101,7 +102,7 @@ class _SearchScreenState extends State<SearchScreenView> {
               },
               itemBuilder: (BuildContext ctx, int idx) {
                 final advice = state.adviceList[idx];
-                return RhymeListCard(
+                return AdviceListCard(
                   advice: advice,
                   onTap: (Advice advice) {
                     context.read<AdviceListCubit>().updateAdvice(
@@ -131,7 +132,7 @@ class _SearchScreenState extends State<SearchScreenView> {
       enableDrag: true,
       context: context,
       builder: (BuildContext ctx) {
-        return SearchRhymesBottomSheet(controller: controller);
+        return SearchAdviceBottomSheet(controller: controller);
       },
     );
   }

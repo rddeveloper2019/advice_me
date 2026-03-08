@@ -24,17 +24,17 @@ void main() async {
   await dotenv.load(fileName: ".env");
   setupDependencies();
   _prefs = await SharedPreferences.getInstance();
-  runApp(const RhymerApp());
+  runApp(const AdviceApp());
 }
 
-class RhymerApp extends StatefulWidget {
-  const RhymerApp({super.key});
+class AdviceApp extends StatefulWidget {
+  const AdviceApp({super.key});
 
   @override
-  State<RhymerApp> createState() => _RhymerAppState();
+  State<AdviceApp> createState() => _AdviceAppState();
 }
 
-class _RhymerAppState extends State<RhymerApp> {
+class _AdviceAppState extends State<AdviceApp> {
   final _router = AppRouter();
 
   @override

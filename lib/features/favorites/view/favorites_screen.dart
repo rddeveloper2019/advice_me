@@ -35,7 +35,7 @@ class FavoritesScreen extends StatelessWidget {
               },
               itemBuilder: (BuildContext ctx, int idx) {
                 final advice = favorites[idx];
-                return RhymeListCard(
+                return AdviceListCard(
                   advice: advice,
                   onTap: (advice) {
                     context.read<AdviceListCubit>().updateAdvice(

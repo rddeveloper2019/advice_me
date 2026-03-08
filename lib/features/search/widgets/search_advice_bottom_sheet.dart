@@ -4,8 +4,8 @@ import 'package:advice_me/core/blocs/advice_list/advice_list_cubit.dart';
 import 'package:advice_me/features/search/blocs/search_advice/search_advice_bloc.dart';
 import 'package:advice_me/ui/ui.dart';
 
-class SearchRhymesBottomSheet extends StatelessWidget {
-  const SearchRhymesBottomSheet({super.key, required this.controller});
+class SearchAdviceBottomSheet extends StatelessWidget {
+  const SearchAdviceBottomSheet({super.key, required this.controller});
 
   final TextEditingController controller;
   @override

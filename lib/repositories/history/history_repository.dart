@@ -11,8 +11,8 @@ class HistoryRepository implements HistoryAdviceRepositoryInterface {
   @override
   Future<void> addAdvice(Advice advice) async {
     final list = await getAdviceList();
-    list.add(advice);
-    await saveAdviceList(list);
+    final newList = list.where((a) => a.id != advice.id);
+    await saveAdviceList([advice, ...newList]);
   }
 
   @override

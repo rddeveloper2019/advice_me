@@ -44,6 +44,17 @@ class AdviceListCubit extends Cubit<AdviceListState> {
     emit(state.copyWith(adviceList: adviceList, isLoading: false));
   }
 
+  Future<void> deleteAdvice(Advice advice) async {
+    emit(state.copyWith(isLoading: true));
+    final adviceList = await _historyRepository.getAdviceList();
+    final updatedAdviceList = adviceList
+        .where((item) => item.id != advice.id)
+        .toList();
+
+    await _historyRepository.updateAdviceList(updatedAdviceList);
+    emit(state.copyWith(adviceList: updatedAdviceList, isLoading: false));
+  }
+
   Future<void> clearHistoryAdvice() async {
     await _historyRepository.clearAll();
     emit(state.copyWith(adviceList: []));
