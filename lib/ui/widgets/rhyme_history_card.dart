@@ -8,41 +8,46 @@ class RhymeHistoryCard extends StatelessWidget {
     required this.advice,
     this.title = 'Совет',
     this.isLarge = false,
+    this.onTap,
   });
 
   final Advice advice;
   final String title;
   final bool isLarge;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return BaseContainer(
-      margin: EdgeInsets.zero,
-      width: 200,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return GestureDetector(
+      onTap: onTap,
+      child: BaseContainer(
+        margin: EdgeInsets.zero,
+        width: 200,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
 
-        children: [
-          Text(
-            title,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w800,
-              color: theme.primaryColor,
+          children: [
+            Text(
+              title,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: theme.primaryColor,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          Text(
-            advice.advice,
-            overflow: TextOverflow.visible,
-            style: isLarge
-                ? theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  )
-                : null,
-          ),
-        ],
+            Text(
+              advice.advice,
+              overflow: TextOverflow.visible,
+              style: isLarge
+                  ? theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w800,
+                    )
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }

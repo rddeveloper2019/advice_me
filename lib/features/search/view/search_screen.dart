@@ -82,6 +82,9 @@ class _SearchScreenState extends State<SearchScreenView> {
                   isLarge: true,
                   title: 'Совет дня',
                   advice: state.advice!,
+                  onTap: () {
+                    context.read<AdviceListCubit>().addAdvice(state.advice!);
+                  },
                 ),
               );
             },
