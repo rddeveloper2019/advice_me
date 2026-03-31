@@ -13,7 +13,7 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    Future<void> _deleteAdvice(Advice advice) async {
+    Future<void> deleteAdvice(Advice advice) async {
       final result = await showDialog<bool?>(
         context: context,
         builder: (BuildContext ctx) {
@@ -74,7 +74,7 @@ class HistoryScreen extends StatelessWidget {
                   return HistoryAdviceCard(
                     advice: advice,
                     onTap: () {
-                      _deleteAdvice(advice);
+                      deleteAdvice(advice);
                     },
                   );
                 },

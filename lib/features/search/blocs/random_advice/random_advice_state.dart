@@ -1,7 +1,7 @@
 part of 'random_advice_cubit.dart';
 
 class RandomAdviceState extends Equatable {
-  RandomAdviceState({this.advice});
+  const RandomAdviceState({this.advice});
 
   final Advice? advice;
   @override

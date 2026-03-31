@@ -26,7 +26,7 @@ class SettingsToggleCard extends StatelessWidget {
           CupertinoSwitch(
             value: value,
             onChanged: onChanged,
-            activeColor: theme.primaryColor,
+            activeTrackColor: theme.primaryColor,
           ),
         ],
       ),

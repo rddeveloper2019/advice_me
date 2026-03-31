@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreenView> {
                   padding: EdgeInsets.all(26.0),
                   child: HistoryAdviceCard(
                     isLarge: true,
-                    title: 'Совет дня',
+                    title: '↺ Совет дня',
                     advice: Advice(id: 0, advice: 'Нет данных'),
                   ),
                 );
@@ -80,7 +80,7 @@ class _SearchScreenState extends State<SearchScreenView> {
                 padding: EdgeInsets.all(16.0),
                 child: HistoryAdviceCard(
                   isLarge: true,
-                  title: 'Совет дня',
+                  title: '↺ Совет дня',
                   advice: state.advice!,
                   onTap: () {
                     context.read<AdviceListCubit>().addAdvice(state.advice!);

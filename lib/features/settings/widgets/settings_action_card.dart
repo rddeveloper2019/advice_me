@@ -37,7 +37,7 @@ class SettingsActionCard extends StatelessWidget {
 
     void onTap() {
       if (onPressed == null) {
-        return null;
+        return;
       }
       if (onPressed != null) {
         onPressed!();
